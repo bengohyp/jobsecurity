@@ -38,7 +38,7 @@
         <div class="menu-logo">
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="index.html">
+                    <a href="index.php">
                         <img src="assets/images/jobsecurity-logo-122x77.png" alt="JobSecurity" title="JobSecurity" style="height: 5rem;">
                     </a>
                 </span>
@@ -47,11 +47,11 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                    <a class="nav-link link text-black display-4" href="index.html">
+                    <a class="nav-link link text-black display-4" href="index.php">
                         Home</a>
                 </li><li class="nav-item"><a class="nav-link link text-black display-4" href="upload.html">
                         Upload CV</a></li>
-                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.html">Contact Us</a></li><li class="nav-item"><a class="nav-link link text-black display-4" href="register.html">Sign Up</a></li></ul>
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.php">Contact Us</a></li><li class="nav-item"><a class="nav-link link text-black display-4" href="register.html">Sign Up</a></li></ul>
             <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="login.html">
                     
                     Login</a></div>
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="align-center">
-                    <form action="/search.php" method="post">
+                    <form action="search.php" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search...">
                         </div>
@@ -115,7 +115,7 @@
         <div class="media-container-row">
             <div class="col-md-3">
                 <div class="media-wrap">
-                    <a href="index.html">
+                    <a href="index.php">
                        <img src="assets/images/jobsecurity-logo-192x121.png" alt="Mobirise" title="">
                     </a>
                 </div>
