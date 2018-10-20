@@ -82,8 +82,12 @@
                 </div>
 
                 <div class="align-center">
-                    <input type="text" class="form-control align-left" placeholder="Search...">                    
-                    <button type="submit" class="btn btn-primary display-4">SEARCH</button>
+                    <form action="/search.php" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                        <button type="submit" class="btn btn-primary display-4">SEARCH</button>
+                    </form>
                 </div>                
 
                 <!--<div class="media-container-column align-center" data-form-type="formoid">
