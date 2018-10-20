@@ -59,7 +59,7 @@
     </nav>
 </section>
 
-<section class="engine"><a href="https://mobirise.info/z">best free website templates</a></section><section class="header14 cid-r6E0Xa3P44 mbr-fullscreen mbr-parallax-background" id="header14-5">
+<!--<section class="engine"><a href="https://mobirise.info/z">best free website templates</a></section>--><section class="header14 cid-r6E0Xa3P44 mbr-fullscreen mbr-parallax-background" id="header14-5">
 
     
 
@@ -68,20 +68,25 @@
     <div class="container">
         <div class="media-container-row">
 
-            <div class="mbr-figure" style="width: 10%;">
+            <!--<div class="mbr-figure" style="width: 10%;">
                 <img src="assets/images/01.jpg" alt="Mobirise">
-            </div>
+            </div>-->
 
             <div class="media-content">
-                <h1 class="mbr-section-title pb-3 align-left mbr-white mbr-fonts-style display-1">
+                <h1 class="mbr-section-title pb-3 align-center mbr-white mbr-fonts-style display-1">
                     Find your dream job now!</h1>
                 
                 <div class="mbr-section-text  pb-3 ">
-                    <p class="mbr-text align-left mbr-white mbr-fonts-style display-5">
+                    <p class="mbr-text align-center mbr-white mbr-fonts-style display-5">
                         Just search for the job position you are looking for</p>
                 </div>
 
-                <div class="media-container-column" data-form-type="formoid">
+                <div class="align-center">
+                    <input type="text" class="form-control align-left" placeholder="Search...">                    
+                    <button type="submit" class="btn btn-primary display-4">SEARCH</button>
+                </div>                
+
+                <!--<div class="media-container-column align-center" data-form-type="formoid">
                     <div data-form-alert="" hidden="">Thanks for filling out the form!</div>
                     <form class="form-inline" action="https://mobirise.com/" method="post" data-form-title="Mobirise Form">
                         <input type="hidden" value="VFcHrC/YXc6ucXJDjRDRXDRN7qxQqUJm4dbV5q/vXldtDnc4IXq1ee1lG2GEIBsE+33v8UXX16DtqAeAbSz0VPJmdLN9uSE1o6TjKiBZ2g6ZzF+m952/S/FhKt4Dgopj" data-form-email="true">
@@ -90,7 +95,7 @@
                         </div>
                         <div class="buttons-wrap"><button href="" class="btn btn-primary display-4" type="submit" role="button">SEARCH</button></div>
                     </form>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -131,22 +136,22 @@
                 <div class="col-md-6">
                     <div class="social-list align-right">
                         <div class="soc-item">
-                            <a href="https://twitter.com/mobirise" target="_blank">
+                            <a href="https://twitter.com" target="_blank">
                                 <span class="socicon-twitter socicon mbr-iconfont mbr-iconfont-social"></span>
                             </a>
                         </div>
                         <div class="soc-item">
-                            <a href="https://www.facebook.com/pages/Mobirise/1616226671953247" target="_blank">
+                            <a href="https://www.facebook.com" target="_blank">
                                 <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
                             </a>
                         </div>
                         <div class="soc-item">
-                            <a href="https://www.youtube.com/c/mobirise" target="_blank">
+                            <a href="https://www.youtube.com" target="_blank">
                                 <span class="socicon-youtube socicon mbr-iconfont mbr-iconfont-social"></span>
                             </a>
                         </div>
                         <div class="soc-item">
-                            <a href="https://instagram.com/mobirise" target="_blank">
+                            <a href="https://instagram.com" target="_blank">
                                 <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
                             </a>
                         </div>
