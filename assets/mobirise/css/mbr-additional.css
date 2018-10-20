@@ -3602,14 +3602,14 @@ body {
 }
 .cid-r71GBnHD4m .card-wrapper .card-img {
   display: -webkit-flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  -webkit-flex-direction: column;
+  -webkit-flex-direction: row;
   -webkit-align-items: center;
   -webkit-justify-content: center;
 }
@@ -3631,7 +3631,7 @@ body {
   -webkit-align-items: center;
 }
 .cid-r71GBnHD4m .card-wrapper .card-img img {
-  width: 100%;
+  width: 25%;
 }
 .cid-r71GBnHD4m .card-wrapper .card-box {
   background-color: #ffffff;

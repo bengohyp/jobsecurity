@@ -84,7 +84,7 @@
                 <div class="align-center">
                     <form action="search.php" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" name="search" class="form-control" placeholder="Search...">
                         </div>
                         <button type="submit" class="btn btn-primary display-4">SEARCH</button>
                     </form>
