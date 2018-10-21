@@ -7,6 +7,8 @@ $searchErr = $search = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["search"])) {
         $searchErr = "Please enter a search term";
+    } elseif (strlen($_POST["search"]) < 3) {
+        $searchErr = "Please enter at least 3 characters to search";
     } else {
         $search = validate_input($_POST["search"]);
         if (!preg_match("/^[a-zA-Z ]*$/",$search)) {

@@ -1778,6 +1778,10 @@ body {
   padding: 0.5rem;
   display: inline-block;
 }
+.cid-r6E0Xa3P44 .error {
+  font-style: normal;
+  color: red;
+}
 .cid-r6E0Xa3P44 .form-inline .buttons-wrap {
   display: inline-block;
 }
@@ -3594,6 +3598,25 @@ body {
   position: relative;
   justify-content: center;
   -webkit-justify-content: center;
+}
+.cid-r71GBnHD4m .card-header {
+  display: -webkit-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  -webkit-flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+}
+.cid-r71GBnHD4m .card-block {
+  background-color: #ffffff;
+  padding: 0 2rem 2rem 2rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .cid-r71GBnHD4m .card-wrapper {
   height: 100%;

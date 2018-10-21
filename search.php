@@ -84,85 +84,43 @@ $search = "";
 
     
     <div class="container">
-    <?php
-    echo "Search term: " . $search . "\n";
-    echo "Results: \n";
-
-    $sql = "SELECT job_title, job_description, company_name, company_logo FROM `jobs` WHERE `job_title` LIKE ?";
-    if ($stmt = $conn->prepare($sql)) {
-        $wildcard_search = "%{$search}%";
-        $stmt->bind_param("s", $wildcard_search);
-        $stmt->execute();
-        $stmt->bind_result($job_title, $job_description, $company_name, $company_logo);
-        while ($stmt->fetch()) {
-            echo '<img src="data:image/jpeg;base64,'.base64_encode( $company_logo ).'" style="width:25%"/>';
-        }
-        $stmt->close();
-    }
-    
-    ?>
         <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Search Results for: <?= $search ?></h2><div class="error"><?= $searchErr ?></div>
-        <h3 class="mbr-section-subtitle display-5 align-center mbr-fonts-style mbr-light">
-            Showing 3 of 3 results</h3>
+        
+        <?php        
+        $sql = "SELECT job_title, job_description, company_name, company_logo FROM `jobs` WHERE `job_title` LIKE ?";
+        if ($stmt = $conn->prepare($sql)) {
+            $wildcard_search = "%{$search}%";
+            $stmt->bind_param("s", $wildcard_search);
+            $stmt->execute();
+            $stmt->store_result();
+        }
+        ?><h3 class="mbr-section-subtitle display-5 align-center mbr-fonts-style mbr-light">Showing <?= $stmt->num_rows ?> result(s)</h3>
+        
+        
+        
+        
+        
             
         <div class="media-container">
-
-            <!-- <div class="card flex-row flex-wrap">                
-                <div class="card-header border-0 w-25">
-                    <img src="assets/images/01.jpg" alt="" style="width:100%">
-                </div>
-                <div class="card-block px-2 w-75">
-                    <h4 class="card-title">Title</h4>
-                    <p class="card-text">Description</p>                    
-                </div>                
-            </div> -->
-
+            <?php
+            $stmt->bind_result($job_title, $job_description, $company_name, $company_logo);
+            while ($stmt->fetch()) {                
+            ?>
             <div class="card p-3 col-12 col-md-6 col-lg-4 flex-row flex-wrap">
-                <div class="card-wrapper ">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a class="btn btn-primary display-4">APPLY NOW</a></div>
-                        <img src="assets/images/01.jpg" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Job Title 1</h4>
-                        <p class="mbr-text mbr-fonts-style align-left display-7">
-                            Job Description 1</p>
-                    </div>
+                <div class="card-header border-0 w-25">                    
+                    <?= '<img src="data:image/jpeg;base64,'.base64_encode( $company_logo ).'" style="width:100%"/>'; ?>
                 </div>
+                <div class="card-block p-4 w-75">
+                    <h4 class="card-title mbr-fonts-style display-7">Job Title: <?= $job_title ?></h4>
+                    <h5 class="card-subtitle">Company Name: <?= $company_name ?></h5>
+                    <p class="mbr-text mbr-fonts-style align-left display-7"> Job Description: <?= $job_description ?></p>  
+                    <a class="btn btn-primary display-4">APPLY NOW</a>
+                </div>  
             </div>
-            <div class="card p-3 col-12 col-md-6 col-lg-4 flex-row flex-wrap">
-                <div class="card-wrapper ">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a class="btn btn-primary display-4">APPLY NOW</a></div>
-                        <img src="assets/images/01.jpg" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Job Title 2</h4>
-                        <p class="mbr-text mbr-fonts-style align-left display-7">
-                            Job Description 2</p>
-                    </div>
-                </div>
-            </div><div class="card p-3 col-12 col-md-6 col-lg-4 flex-row flex-wrap">
-                <div class="card-wrapper ">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a class="btn btn-primary display-4">APPLY NOW</a></div>
-                        <img src="assets/images/01.jpg" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Job Title 3</h4>
-                        <p class="mbr-text mbr-fonts-style align-left display-7">
-                            Job Description 3</p>
-                    </div>
-                </div>
-            </div>
-
-            
+            <?php
+            }
+            $stmt->close();
+            ?>
         </div>
     </div>
 </section>
