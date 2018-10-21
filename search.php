@@ -87,10 +87,10 @@ $search = "";
         <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Search Results for: <?= $search ?></h2><div class="error"><?= $searchErr ?></div>
         
         <?php        
-        $sql = "SELECT job_title, job_description, company_name, company_logo FROM `jobs` WHERE `job_title` LIKE ?";
+        $sql = "SELECT job_title, job_description, company_name, company_logo FROM `jobs` WHERE `job_title` LIKE ? OR `job_description` LIKE ?";
         if ($stmt = $conn->prepare($sql)) {
             $wildcard_search = "%{$search}%";
-            $stmt->bind_param("s", $wildcard_search);
+            $stmt->bind_param("ss", $wildcard_search, $wildcard_search);
             $stmt->execute();
             $stmt->store_result();
         }
