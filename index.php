@@ -1,3 +1,28 @@
+<?php
+
+require_once("php/functions.php");
+
+$searchErr = $search = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["search"])) {
+        $searchErr = "Please enter a search term";
+    } else {
+        $search = validate_input($_POST["search"]);
+        if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
+            $searchErr = "Only letters and spaces allowed";
+        } else {
+            session_start();
+            $_SESSION = $_POST;
+            session_write_close();
+            header('Location: search.php');
+            exit();
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -82,10 +107,11 @@
                 </div>
 
                 <div class="align-center">
-                    <form action="search.php" method="post">
+                    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                         <div class="form-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search...">
+                            <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $search;?>">
                         </div>
+                        <div class="error"><?= $searchErr ?></div>
                         <button type="submit" class="btn btn-primary display-4">SEARCH</button>
                     </form>
                 </div>                

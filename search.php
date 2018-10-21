@@ -1,3 +1,23 @@
+<?php
+require_once("php/functions.php");
+require_once("php/database.php");
+
+session_start();
+$_POST = $_SESSION;
+
+$search = "";
+
+
+    if (empty($_POST["search"])) {
+        $searchErr = "Please enter a search term";
+    } else {
+        $search = validate_input($_POST["search"]);
+        if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
+            $searchErr = "Only letters and spaces allowed";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -64,11 +84,24 @@
 
     
     <div class="container">
-        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Search Results for: 
-            <?php
-            echo $_POST["search"]
-            ?>
-        </h2>        
+    <?php
+    echo "Search term: " . $search . "\n";
+    echo "Results: \n";
+
+    $sql = "SELECT job_title, job_description, company_name, company_logo FROM `jobs` WHERE `job_title` LIKE ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $wildcard_search = "%{$search}%";
+        $stmt->bind_param("s", $wildcard_search);
+        $stmt->execute();
+        $stmt->bind_result($job_title, $job_description, $company_name, $company_logo);
+        while ($stmt->fetch()) {
+            echo '<img src="data:image/jpeg;base64,'.base64_encode( $company_logo ).'" style="width:25%"/>';
+        }
+        $stmt->close();
+    }
+    
+    ?>
+        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Search Results for: <?= $search ?></h2><div class="error"><?= $searchErr ?></div>
         <h3 class="mbr-section-subtitle display-5 align-center mbr-fonts-style mbr-light">
             Showing 3 of 3 results</h3>
             
