@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if (!empty($_SESSION["successmsg"])) {
+    $successmsg = $_SESSION["successmsg"];
+    unset($_SESSION["successmsg"]);
+}
+
+?>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -72,7 +83,8 @@
                     Log in to start your job hunt</h3>
             </div>
         </div>
-    </div>
+    </div>    
+    <span class="align-center"><div class="error"><?= $successmsg ?></div><br></span>
     <div class="container">
         <div class="row justify-content-center">
             <div class="media-container-column col-lg-8" data-form-type="formoid">

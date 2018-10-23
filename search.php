@@ -7,15 +7,15 @@ $_POST = $_SESSION;
 
 $search = "";
 
-
-    if (empty($_POST["search"])) {
-        $searchErr = "Please enter a search term";
-    } else {
-        $search = validate_input($_POST["search"]);
-        if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
-            $searchErr = "Only letters and spaces allowed";
-        }
+if (empty($_POST["search"])) {
+    $searchErr = "Please enter a search term";
+} else {
+    $search = validate_input($_POST["search"]);
+    if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
+        $searchErr = "Only letters and spaces allowed";
     }
+}
+
 ?>
 
 <!DOCTYPE html>

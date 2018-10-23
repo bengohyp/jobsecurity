@@ -73,12 +73,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                    <a class="nav-link link text-black display-4" href="index.php">
-                        Home</a>
-                </li><li class="nav-item"><a class="nav-link link text-black display-4" href="upload.html">
-                        Upload CV</a></li>
-                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.php">Contact Us</a></li><li class="nav-item"><a class="nav-link link text-black display-4" href="register.html">Sign Up</a></li></ul>
+            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.php">Home</a></li>
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="upload.html">Upload CV</a></li>
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.php">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="register.php">Sign Up</a></li></ul>
             <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="login.html">
                     
                     Login</a></div>
@@ -108,10 +107,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         Just search for the job position you are looking for</p>
                 </div>
 
-                <div class="align-center">
-                    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                <div class="align-center">                    
+                    <form action="<?= $phpSelf; ?>" method="POST">
                         <div class="form-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $search;?>">
+                            <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $search; ?>" required autofocus>
                         </div>
                         <div class="error"><?= $searchErr ?></div>
                         <button type="submit" class="btn btn-primary display-4">SEARCH</button>
