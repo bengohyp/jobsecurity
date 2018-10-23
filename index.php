@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("php/html_functions.php");
 require_once("php/functions.php");
 

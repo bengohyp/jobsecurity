@@ -46,12 +46,12 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                    <a class="nav-link link text-black display-4" href="index.html">
+                    <a class="nav-link link text-black display-4" href="index.php">
                         Home</a>
-                </li><li class="nav-item"><a class="nav-link link text-black display-4" href="upload.html">
+                </li><li class="nav-item"><a class="nav-link link text-black display-4" href="upload.php">
                         Upload CV</a></li>
-                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.html">Contact Us</a></li><li class="nav-item"><a class="nav-link link text-black display-4" href="register.html">Sign Up</a></li></ul>
-            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="login.html">
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.php">Contact Us</a></li><li class="nav-item"><a class="nav-link link text-black display-4" href="register.html">Sign Up</a></li></ul>
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="login.php">
                     
                     Login</a></div>
         </div>

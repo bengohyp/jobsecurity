@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "jobsecurity.cuwmzjglw8nw.ap-southeast-1.rds.amazonaws.com";
 $db_username = "jobsecurity";
 $db_password = "password";
 $db_name = "jobsecurity";
@@ -47,6 +47,32 @@ function create_new_user($username, $password, $conn) {
         return false;
     }
     return true;
+}
+
+function login_user($user,$pw,$conn){
+    $sql = "Select password from `users` where username = ? ";
+        if (!($stmt = $conn->prepare($sql))) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+        return false;
+    }
+    if (!$stmt->bind_param("s", $user)) {
+        die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
+        return false;
+    }
+    if (!$stmt->execute()) {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+        return false;
+    }
+    $stmt->bind_result($db_pw);
+        $stmt->fetch();      
+        echo $db_pw;
+        if (password_verify($pw, $db_pw)) {
+            return true;
+        } else {
+            return false;
+        }
+        $stmt->close();
+    return false;
 }
 
 ?>

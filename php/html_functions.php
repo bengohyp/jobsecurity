@@ -49,7 +49,11 @@ function jobsec_header() {
                             <li class="nav-item"><a class="nav-link link text-black display-4" href="register.php">Sign Up</a></li>
                         </ul>
                         <div class="navbar-buttons mbr-section-btn">
+                            <?php if (isset($_SESSION['login_user'])){ ?>
+                            Logged in as <?= $_SESSION['login_user']?> <a class="btn btn-sm btn-primary display-4" href="logout.php">Logout</a>
+                            <?php } else{?>
                             <a class="btn btn-sm btn-primary display-4" href="login.php">Login</a>
+                            <?php }?>
                         </div>
                     </div>
                 </nav>
