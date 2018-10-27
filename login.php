@@ -54,7 +54,8 @@ if (!empty($_SESSION["successmsg"])) {
             </div>
         </div>
     </div>    
-    <span class="align-center"><div class="error"><?php if (isset($usernameErr)){ echo $usernameErr; }?></div><br></span>
+    <?= $_SESSION["successmsg"] ?>
+    <span class="align-center"><div class="error"><?= $successmsg; ?></div><br></span>
     <div class="container">
         <div class="row justify-content-center">
             <div >

@@ -5,7 +5,11 @@ require_once("php/functions.php");
 
 $searchErr = $search = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (!empty($_SESSION["searchErr"])) {
+    $searchErr = $_SESSION["searchErr"];
+}
+
+/* if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["search"])) {
         $searchErr = "Please enter a search term";
     } elseif (strlen($_POST["search"]) < 3) {
@@ -15,14 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
             $searchErr = "Only letters and spaces allowed";
         } else {
-            session_start();
+            $login_user = $_SESSION["login_user"];
             $_SESSION = $_POST;
+            $_SESSION["login_user"] = $login_user;
             session_write_close();
             header('Location: search.php');
             exit();
         }
     }
-}
+} */
 
 ?>
 
@@ -40,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="align-center">                    
-                    <form action="<?= $phpSelf; ?>" method="POST">
+                    <form action="search.php" method="POST">
                         <div class="form-group">
                             <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $search; ?>" required autofocus>
                         </div>

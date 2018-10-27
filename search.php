@@ -1,19 +1,26 @@
 <?php
+session_start();
+
 require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
 
-session_start();
-$_POST = $_SESSION;
+#$_POST = $_SESSION;
 
 $search = "";
 
-if (empty($_POST["search"])) {
-    $searchErr = "Please enter a search term";
-} else {
-    $search = validate_input($_POST["search"]);
-    if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
-        $searchErr = "Only letters and spaces allowed";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["search"])) {
+        $_SESSION["searchErr"] = "Please enter a search term";
+    } elseif (strlen($_POST["search"]) < 3) {
+        $_SESSION["searchErr"] = "Please enter at least 3 characters to search";
+        header('Location: index.php');
+    } else {
+        $search = validate_input($_POST["search"]);
+        if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
+            $_SESSION["searchErr"] = "Only letters and spaces allowed";
+            header('Location: index.php');
+        }
     }
 }
 

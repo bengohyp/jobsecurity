@@ -1,5 +1,6 @@
 <?php
-$servername = "jobsecurity.cuwmzjglw8nw.ap-southeast-1.rds.amazonaws.com";
+#$servername = "jobsecurity.cuwmzjglw8nw.ap-southeast-1.rds.amazonaws.com";
+$servername = "localhost";
 $db_username = "jobsecurity";
 $db_password = "password";
 $db_name = "jobsecurity";

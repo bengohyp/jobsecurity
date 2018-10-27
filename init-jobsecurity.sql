@@ -26,3 +26,11 @@ INSERT INTO `jobs` VALUES (1,'Photographer','Job Description for Photographer', 
 (3,'Legislative Assistant','Job Description for Legislative Assistant', 'Lawyer & Company', ''),
 (4,'Test Job Title','Test Job Description', 'Test Company', '');
 UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `_id` int(11) NOT NULL auto_increment,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  PRIMARY KEY (`_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
