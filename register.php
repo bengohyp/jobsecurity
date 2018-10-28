@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $password = validate_input($_POST["password"]);
                     $confirm_password = validate_input($_POST["confirm_password"]);
                     if (!preg_match_all('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/',$password)) {
-                        $passwordErr = "Password does not meet the complexity requirements";
+                        $passwordErr = "Passwords need to be 8-12 characters, contain at least 1 lowercase character, 1 uppercase character, 1 number and 1 special symbol";
                     } elseif($password != $confirm_password) {
                         $passwordErr = "Passwords do not match";
                     } else {
