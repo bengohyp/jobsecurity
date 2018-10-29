@@ -51,7 +51,7 @@ function create_new_user($username, $password, $conn) {
 }
 
 function login_user($user,$pw,$conn){
-    $sql = "Select password from `users` where username = ? ";
+    $sql = "Select password from `users` where username = ? LIMIT 1;";
         if (!($stmt = $conn->prepare($sql))) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
         return false;

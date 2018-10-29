@@ -2,6 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
+if (!isset($_SESSION['initiated'])) {
+   session_regenerate_id();
+   $_SESSION['initiated'] = TRUE;
+}
 require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
@@ -54,24 +58,23 @@ if (!empty($_SESSION["successmsg"])) {
             </div>
         </div>
     </div>    
-    <?= $_SESSION["successmsg"] ?>
-    <span class="align-center"><div class="error"><?= $successmsg; ?></div><br></span>
+    <span class="align-center"><div class="error"><?php echo @$successmsg ?: ''; ?></div><br></span>
     <div class="container">
         <div class="row justify-content-center">
             <div >
                     <div data-form-alert="" hidden="">Thanks for filling out the form!</div>
             
-                    <form action="login.php" method="POST"><div class="row row-sm-offset">
+                    <form  action="login.php" method="POST" autocomplete="off"><div class="row row-sm-offset">
                             <div class="col-md-4 multi-horizontal" data-for="name">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="name-form1-m">Name</label>
-                                    <input type="text" class="form-control" name="username" data-form-field="Name"  placeholder="Username">
+                                    <input type="text" class="form-control" name="username" data-form-field="Name" placeholder="Username">
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" data-for="email">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="email-form1-m">Password</label>
-                                    <input type="password" class="form-control" name="password"  placeholder="Password" >
+                                    <input type="password" class="form-control" name="password" autocomplete="new-password" placeholder="Password" >
                                 </div>
                             </div>
                             
