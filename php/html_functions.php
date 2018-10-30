@@ -1,6 +1,7 @@
 <?php
 
-function jobsec_header() {
+function jobsec_header()
+{
     ?>
     <!DOCTYPE html>
         <html>
@@ -49,11 +50,15 @@ function jobsec_header() {
                             <li class="nav-item"><a class="nav-link link text-black display-4" href="register.php">Sign Up</a></li>
                         </ul>
                         <div class="navbar-buttons mbr-section-btn">
-                            <?php if (isset($_SESSION['login_user'])){ ?>
+                            <?php if (isset($_SESSION['login_user'])) {
+        ?>
                             Logged in as <?= $_SESSION['login_user']?> <a class="btn btn-sm btn-primary display-4" href="logout.php">Logout</a>
-                            <?php } else{?>
+                            <?php
+    } else {
+        ?>
                             <a class="btn btn-sm btn-primary display-4" href="login.php">Login</a>
-                            <?php }?>
+                            <?php
+    } ?>
                         </div>
                     </div>
                 </nav>
@@ -62,7 +67,8 @@ function jobsec_header() {
 <?php
 }
 
-function jobsec_footer() {
+function jobsec_footer()
+{
     ?>
     <section class="cid-r6E1gEZCGl" id="footer5-6">
         <div class="container">

@@ -1,11 +1,14 @@
 <?php
 session_start();
 if (!isset($_SESSION['initiated'])) {
-   session_regenerate_id();
-   $_SESSION['initiated'] = TRUE;
+    session_regenerate_id();
+    $_SESSION['initiated'] = true;
 }
 
 require_once("php/html_functions.php");
+require_once("php/functions.php");
+
+$token = get_csrf_token();
 
 jobsec_header();
 ?>

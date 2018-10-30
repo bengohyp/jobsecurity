@@ -1,26 +1,27 @@
 <?php
 $servername = "jobsecurity.cuwmzjglw8nw.ap-southeast-1.rds.amazonaws.com";
 #$servername = "localhost";
-$db_username = "jobsecurity";
-$db_password = "password";
+$db_username = "webserviceuser";
+$db_password = "P@ssw0rd.123";
 $db_name = "jobsecurity";
 
 $conn = new mysqli($servername, $db_username, $db_password, $db_name);
 
 if ($conn->connect_error) {
-    die ("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
     exit();
 } else {
     #echo "Connected successfully";
 }
 
-function check_existing_username($username, $conn) {
+function check_existing_username($username, $conn)
+{
     $sql = "SELECT username FROM `users` WHERE `username` = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("s", $username);
-        $stmt->execute();        
+        $stmt->execute();
         $stmt->bind_result($check_username);
-        $stmt->fetch();        
+        $stmt->fetch();
         if ($check_username == $username) {
             return true;
         } else {
@@ -32,7 +33,8 @@ function check_existing_username($username, $conn) {
     }
 }
 
-function create_new_user($username, $password, $conn) {
+function create_new_user($username, $password, $conn)
+{
     $sql = "INSERT INTO `users`(`username`, `password`) VALUES (?, ?)";
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
     if (!($stmt = $conn->prepare($sql))) {
@@ -50,9 +52,10 @@ function create_new_user($username, $password, $conn) {
     return true;
 }
 
-function login_user($user,$pw,$conn){
+function login_user($user, $pw, $conn)
+{
     $sql = "Select password from `users` where username = ? LIMIT 1;";
-        if (!($stmt = $conn->prepare($sql))) {
+    if (!($stmt = $conn->prepare($sql))) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
         return false;
     }
@@ -65,15 +68,13 @@ function login_user($user,$pw,$conn){
         return false;
     }
     $stmt->bind_result($db_pw);
-        $stmt->fetch();      
-        echo $db_pw;
-        if (password_verify($pw, $db_pw)) {
-            return true;
-        } else {
-            return false;
-        }
-        $stmt->close();
+    $stmt->fetch();
+    echo $db_pw;
+    if (password_verify($pw, $db_pw)) {
+        return true;
+    } else {
+        return false;
+    }
+    $stmt->close();
     return false;
 }
-
-?>

@@ -1,11 +1,13 @@
 <?php
 session_start();
 if (!isset($_SESSION['initiated'])) {
-   session_regenerate_id();
-   $_SESSION['initiated'] = TRUE;
+    session_regenerate_id();
+    $_SESSION['initiated'] = true;
 }
 require_once("php/html_functions.php");
 require_once("php/functions.php");
+
+$token = get_csrf_token();
 
 $searchErr = $search = "";
 
@@ -34,7 +36,6 @@ if (!empty($_SESSION["searchErr"])) {
 } */
 
 ?>
-
 <?php jobsec_header(); ?>
 <section class="header14 cid-r6E0Xa3P44 mbr-fullscreen mbr-parallax-background" id="header14-5">
     <div class="container">
@@ -50,6 +51,7 @@ if (!empty($_SESSION["searchErr"])) {
 
                 <div class="align-center">                    
                     <form action="search.php" method="POST">
+                        <input type="hidden" name="token" value="<?php echo $token; ?>" />
                         <div class="form-group">
                             <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $search; ?>" required autofocus>
                         </div>
@@ -61,5 +63,4 @@ if (!empty($_SESSION["searchErr"])) {
         </div>
     </div>
 </section>
-
 <?php jobsec_footer(); ?>

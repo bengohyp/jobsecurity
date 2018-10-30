@@ -5,11 +5,13 @@ require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
 
+$token = get_csrf_token();
+
 #$_POST = $_SESSION;
 
 $search = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
     if (empty($_POST["search"])) {
         $_SESSION["searchErr"] = "Please enter a search term";
     } elseif (strlen($_POST["search"]) < 3) {
@@ -17,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: index.php');
     } else {
         $search = validate_input($_POST["search"]);
-        if (!preg_match("/^[a-zA-Z ]*$/",$search)) {
+        if (!preg_match("/^[a-zA-Z ]*$/", $search)) {
             $_SESSION["searchErr"] = "Only letters and spaces allowed";
             header('Location: index.php');
         }
@@ -30,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Search Results for: <?= $search ?></h2><div class="error"><?= $searchErr ?></div>
         
-        <?php        
+        <?php
         $sql = "SELECT job_title, job_description, company_name, company_logo FROM `jobs` WHERE `job_title` LIKE ? OR `job_description` LIKE ?";
         if ($stmt = $conn->prepare($sql)) {
             $wildcard_search = "%{$search}%";
@@ -43,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="media-container">
             <?php
             $stmt->bind_result($job_title, $job_description, $company_name, $company_logo);
-            while ($stmt->fetch()) {                
-            ?>
+            while ($stmt->fetch()) {
+                ?>
             <div class="card p-3 col-12 col-md-6 col-lg-4 flex-row flex-wrap">
                 <div class="card-header border-0 w-25">                    
-                    <?= '<img src="data:image/jpeg;base64,'.base64_encode( $company_logo ).'" style="width:100%"/>'; ?>
+                    <?= '<img src="data:image/jpeg;base64,'.base64_encode($company_logo).'" style="width:100%"/>'; ?>
                 </div>
                 <div class="card-block p-4 w-75">
                     <h4 class="card-title mbr-fonts-style display-7">Job Title: <?= $job_title ?></h4>
