@@ -25,6 +25,7 @@ if (!empty($_SESSION["successmsg"])) {
     } elseif (empty($_POST["password"])) {
         $usernameErr = "Please enter a password";
     } else {
+        $_POST["username"]=filter_var($_POST["username"],FILTER_SANITIZE_STRING);
         if (login_user($_POST["username"], $_POST["password"], $conn)) {
             session_start();
             $_SESSION['login_user']=$_POST["username"];

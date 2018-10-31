@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
                 } elseif (strlen($_POST["password"]) < 6) {
                     $passwordErr = "Please enter at least 6 characters";
                 } else {
+                    $_POST["username"]=filter_var($_POST["username"],FILTER_SANITIZE_STRING);
                     $password = validate_input($_POST["password"]);
                     $confirm_password = validate_input($_POST["confirm_password"]);
                     if (!preg_match_all('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {

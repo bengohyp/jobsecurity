@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
         $_SESSION["searchErr"] = "Please enter at least 3 characters to search";
         header('Location: index.php');
     } else {
+        $_POST["search"]=filter_var($_POST["search"],FILTER_SANITIZE_STRING);
         $search = validate_input($_POST["search"]);
         if (!preg_match("/^[a-zA-Z ]*$/", $search)) {
             $_SESSION["searchErr"] = "Only letters and spaces allowed";
