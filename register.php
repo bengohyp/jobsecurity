@@ -8,6 +8,7 @@ if (!isset($_SESSION['initiated'])) {
 require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
+require_once("php/check_weak_pass.php");
 
 $token = get_csrf_token();
 
@@ -37,7 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
                     $confirm_password = validate_input($_POST["confirm_password"]);
                     if (!preg_match_all('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {
                         $passwordErr = "Passwords need to be 8-12 characters, contain at least 1 lowercase character, 1 uppercase character, 1 number and 1 special symbol";
-                    } elseif ($password != $confirm_password) {
+                    }
+                    //check if the passwords entered are in the top 1 million weak passwords.
+                    elseif(in_array($password, $weak_passwords)){
+                        $passwordErr = "Passwords is one of the top 1000,000 weak passwords. Please choose stronger passwords.";
+                    }
+                    elseif($password != $confirm_password) {
                         $passwordErr = "Passwords do not match";
                     } else {
                         $password_ok = true;
@@ -97,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
                 </div>
             </form>
         </div>
-    </div>    
+    </div>
 </section>
 
 <?php jobsec_footer(); ?>
