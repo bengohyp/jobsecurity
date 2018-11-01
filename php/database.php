@@ -44,7 +44,7 @@ function create_new_user($username, $password, $conn)
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
         return false;
     }
-    if (!$stmt->bind_param("ss", $username, $password_hash, $todays_date)) {
+    if (!$stmt->bind_param("sss", $username, $password_hash, $todays_date)) {
         die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
         return false;
     }
@@ -75,8 +75,13 @@ function login_user($user, $pw, $conn)
     echo $db_pw;
     if (password_verify($pw, $db_pw)) {
         //Check if password has been expired: 90 days 
-        $date_difference = date_diff(date_create($todays_date),date_create('2018-10-17'));
-        // $date_difference->format('%d days');
+        $OldDate = new DateTime('2018-08-03'); //Hardcoded date to test 90 days from today
+        $now = new DateTime(Date('Y-m-d'));
+        $date_diff = $OldDate->diff($now);
+        if($date_diff->{'days'} == 90){
+            header('Location: resetPassword.php');
+            return false;
+        }
         return true;
     } else {
         return false;

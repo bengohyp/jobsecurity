@@ -73,7 +73,7 @@ if (!empty($_SESSION["successmsg"])) {
                         
             
                         <span class="input-group-btn"><button  type="submit" class="btn btn-primary btn-form display-4">LOG IN</button></span>
-                        <a href='resetPassword.php?username=priyankajalan'><p  class="text-center" style="margin-top:20px;">I forgot my password !</p></a>
+                        <a href='resetPassword.php?username=priyankajalan'><p  class="text-center" style="margin-top:20px;">Reset password</p></a>
                     </form>
             </div>
         </div>
