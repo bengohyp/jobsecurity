@@ -4,7 +4,7 @@ session_start();
 require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
-
+cors();
 $token = get_csrf_token();
 
 #$_POST = $_SESSION;
