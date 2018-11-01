@@ -9,7 +9,7 @@ require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
 require_once("php/check_weak_pass.php");
-
+cors();
 $token = get_csrf_token();
 
 $usernameErr = "";

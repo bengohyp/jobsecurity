@@ -10,7 +10,7 @@ if (!isset($_SESSION['initiated'])) {
 require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
-
+cors();
 $token = get_csrf_token();
 
 if (!empty($_SESSION["successmsg"])) {

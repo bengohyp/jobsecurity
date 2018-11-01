@@ -6,7 +6,7 @@ if (!isset($_SESSION['initiated'])) {
 }
 require_once("php/html_functions.php");
 require_once("php/functions.php");
-
+cors();
 $token = get_csrf_token();
 
 $searchErr = $search = "";
