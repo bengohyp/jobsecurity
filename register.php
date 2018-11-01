@@ -37,12 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
                     $_POST["username"]=filter_var($_POST["username"],FILTER_SANITIZE_STRING);
                     $password = validate_input($_POST["password"]);
                     $confirm_password = validate_input($_POST["confirm_password"]);
-                    if (!preg_match_all('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {
+                    if (!preg_match_all('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z.!@#$%^&-_=?|]{8,12}$/', $password)) {
                         $passwordErr = "Passwords need to be 8-12 characters, contain at least 1 lowercase character, 1 uppercase character, 1 number and 1 special symbol";
                     }
                     //check if the passwords entered are in the top 1 million weak passwords.
                     elseif(in_array($password, $weak_passwords)){
-                        $passwordErr = "Passwords is one of the top 1000,000 weak passwords. Please choose stronger passwords.";
+                        $passwordErr = "Passwords is one of the top 1,000,000 weak passwords. Please choose stronger passwords.";
                     }
                     elseif($password != $confirm_password) {
                         $passwordErr = "Passwords do not match";
