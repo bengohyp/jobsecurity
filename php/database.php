@@ -35,13 +35,16 @@ function check_existing_username($username, $conn)
 
 function create_new_user($username, $password, $conn)
 {
-    $sql = "INSERT INTO `users`(`username`, `password`) VALUES (?, ?)";
+    $date = new DateTime();
+    $todays_date = $date->format('Y-m-d');
+    //Save with today's date when we register
+    $sql = "INSERT INTO `users`(`username`, `password`, `createdAt`) VALUES (?, ?, ?)";
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
     if (!($stmt = $conn->prepare($sql))) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
         return false;
     }
-    if (!$stmt->bind_param("ss", $username, $password_hash)) {
+    if (!$stmt->bind_param("ss", $username, $password_hash, $todays_date)) {
         die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
         return false;
     }
@@ -71,6 +74,9 @@ function login_user($user, $pw, $conn)
     $stmt->fetch();
     echo $db_pw;
     if (password_verify($pw, $db_pw)) {
+        //Check if password has been expired: 90 days 
+        $date_difference = date_diff(date_create($todays_date),date_create('2018-10-17'));
+        // $date_difference->format('%d days');
         return true;
     } else {
         return false;
@@ -78,3 +84,24 @@ function login_user($user, $pw, $conn)
     $stmt->close();
     return false;
 }
+
+function reset_password($username, $password, $conn){
+
+    $sql = "UPDATE `users` SET `password` = ? WHERE `username` = ?";
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    if (!($stmt = $conn->prepare($sql))) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+        return false;
+    }
+    if (!$stmt->bind_param("ss", $password_hash, $username)) {
+        die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
+        return false;
+    }
+    if (!$stmt->execute()) {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+        return false;
+    }
+    return true;
+}
+

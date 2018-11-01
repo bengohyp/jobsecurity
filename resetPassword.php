@@ -9,6 +9,7 @@ require_once("php/html_functions.php");
 require_once("php/functions.php");
 require_once("php/database.php");
 require_once("php/check_weak_pass.php");
+
 $token = get_csrf_token();
 
 $usernameErr = "";
@@ -25,8 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
             $usernameErr = "Only letters and numbers allowed";
         } else {
             if (check_existing_username($username, $conn)) {
-                $usernameErr = "Username already exists. Please choose another username";
-            } else {
                 $username_ok = true;
                 if (empty($_POST["password"])) {
                     $passwordErr = "Please enter a password";
@@ -49,22 +48,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
                         $password_ok = true;
                     }
                 }
+            } else {
+                $usernameErr = "Username not found! Please try again";
             }
         }
     }
     if ($username_ok && $password_ok) {
         //create new user in db then redirect to home
-        if (!create_new_user($username, $password, $conn)) {
+        if (!reset_password($username, $password, $conn)) {
             //redirect to error page
             session_start();
-            $_SESSION["errmsg"] = "Could not create user. Please contact a system administrator";
+            $_SESSION["errmsg"] = "Could not update password. Please contact a system administrator";
             session_write_close();
             header('Location: error.php');
             exit();
         } else {
             //redirect to login
             session_start();
-            $_SESSION["successmsg"] = "User account created! Please log in with your username and password";
+            $_SESSION["successmsg"] = "Password updated! Please log in with your username and password";
             session_write_close();
             header('Location: login.php');
             exit();
@@ -80,9 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
         <div class="row justify-content-center">
             <div class="title col-12 col-lg-8">
                 <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
-                    SIGN UP</h2>
+                    Your Password has expired !</h2>
                 <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
-                    Sign up as a job seeker to find and apply for your dream job</h3>
+                    Please choose a new password</h3>
             </div>
         </div>
     </div>
@@ -92,14 +93,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && validate_csrf($_POST)) {
                 <input type="hidden" name="token" value="<?php echo $token; ?>" />
                 <div class="form-group">
                     <label class="form-control-label" for="username">Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?= $username;?>" required autofocus>
+                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?= $username;?>">
                     <div class="error"><?= $usernameErr ?></div><br>
                     <label class="form-control-label" for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password" value="<?= $password;?>">
                     <div class="error"><?= $passwordErr ?></div><br>
                     <label class="form-control-label" for="confirm_password">Confirm Password</label>
                     <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" value="<?= $confirm_password;?>"><br>
-                    <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary btn-form display-4">REGISTER</button></span>
+                    <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary btn-form display-4">Reset Password</button></span>
                 </div>
             </form>
         </div>
